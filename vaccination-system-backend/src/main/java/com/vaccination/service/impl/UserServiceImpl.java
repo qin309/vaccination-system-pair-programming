@@ -9,8 +9,13 @@ import com.vaccination.mapper.UserMapper;
 import com.vaccination.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
+    private static final int MAX_LOGIN_FAIL_COUNT = 5;
+    private static final int LOCK_MINUTES = 30;
 
     @Override
     public User login(LoginDTO dto) {
@@ -18,13 +23,58 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (user == null) {
             throw new RuntimeException("用户不存在");
         }
-        if (!BCrypt.checkpw(dto.getPassword(), user.getPassword())) {
-            throw new RuntimeException("密码错误");
-        }
         if (user.getStatus() == 1) {
             throw new RuntimeException("账户已被禁用");
         }
+        // 检查账户是否被锁定
+        if (isAccountLocked(user)) {
+            throw new RuntimeException("账户已被锁定，请" + LOCK_MINUTES + "分钟后再试");
+        }
+        if (!BCrypt.checkpw(dto.getPassword(), user.getPassword())) {
+            // 密码错误，增加失败次数
+            handleLoginFail(user);
+            int remaining = MAX_LOGIN_FAIL_COUNT - (user.getLoginFailCount() == null ? 0 : user.getLoginFailCount());
+            throw new RuntimeException("密码错误，剩余尝试次数：" + remaining + "次");
+        }
+        // 登录成功，重置失败次数
+        resetLoginFailCount(user);
         return user;
+    }
+
+    /**
+     * 检查账户是否被锁定
+     */
+    private boolean isAccountLocked(User user) {
+        if (user.getLoginFailCount() != null && user.getLoginFailCount() >= MAX_LOGIN_FAIL_COUNT) {
+            if (user.getLockTime() != null && user.getLockTime().plusMinutes(LOCK_MINUTES).isAfter(LocalDateTime.now())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 处理登录失败
+     */
+    private void handleLoginFail(User user) {
+        int failCount = user.getLoginFailCount() == null ? 0 : user.getLoginFailCount();
+        failCount++;
+        user.setLoginFailCount(failCount);
+        if (failCount >= MAX_LOGIN_FAIL_COUNT) {
+            user.setLockTime(LocalDateTime.now());
+        }
+        updateById(user);
+    }
+
+    /**
+     * 重置登录失败次数
+     */
+    private void resetLoginFailCount(User user) {
+        if (user.getLoginFailCount() != null && user.getLoginFailCount() > 0) {
+            user.setLoginFailCount(0);
+            user.setLockTime(null);
+            updateById(user);
+        }
     }
 
     @Override

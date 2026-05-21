@@ -18,6 +18,10 @@ public class User {
     private Integer role; // 0-普通用户 1-医护人员 2-管理员
     private Integer status; // 0-正常 1-禁用
 
+    private Integer loginFailCount; // 登录失败次数
+
+    private LocalDateTime lockTime; // 账户锁定时间
+
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 

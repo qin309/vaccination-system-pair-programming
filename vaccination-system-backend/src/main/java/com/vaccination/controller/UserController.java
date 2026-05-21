@@ -25,12 +25,17 @@ public class UserController {
 
     @PostMapping("/login")
     public Result<Map<String, Object>> login(@RequestBody LoginDTO dto) {
-        User user = userService.login(dto);
-        String token = jwtUtil.generateToken(user.getId(), user.getUsername(), user.getRole());
-        Map<String, Object> data = new HashMap<>();
-        data.put("token", token);
-        data.put("user", user);
-        return Result.success(data);
+        try {
+            User user = userService.login(dto);
+            String token = jwtUtil.generateToken(user.getId(), user.getUsername(), user.getRole());
+            Map<String, Object> data = new HashMap<>();
+            data.put("token", token);
+            data.put("user", user);
+            return Result.success(data);
+        } catch (RuntimeException e) {
+            // 登录失败时返回具体的错误原因（用户不存在/密码错误/账户被锁定等）
+            return Result.error(400, e.getMessage());
+        }
     }
 
     @PostMapping("/register")
