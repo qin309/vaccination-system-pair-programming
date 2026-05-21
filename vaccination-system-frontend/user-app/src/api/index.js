@@ -40,9 +40,19 @@ api.interceptors.response.use(
 )
 
 export default {
+  // 用户模块接口
   login: (data) => api.post('/user/login', data),
   register: (data) => api.post('/user/register', data),
   getUserInfo: () => api.get('/user/info'),
   updateUserInfo: (data) => api.put('/user/update', data),
-  changePassword: (oldPassword, newPassword) => api.post('/user/changePassword', null, { params: { oldPassword, newPassword } })
+  changePassword: (oldPassword, newPassword) => api.post('/user/changePassword', null, { params: { oldPassword, newPassword } }),
+
+  // 疫苗管理模块接口
+  getVaccines: () => api.get('/vaccine/list'),
+  getVaccineDetail: (id) => api.get(`/vaccine/detail/${id}`),
+  addVaccine: (data) => api.post('/vaccine/add', data),
+  updateVaccine: (data) => api.put('/vaccine/update', data),
+  getBatchList: () => api.get('/vaccine/batch/list'),
+  getExpiringBatches: () => api.get('/vaccine/batch/expiring'),
+  addBatch: (data) => api.post('/vaccine/batch/add', data)
 }

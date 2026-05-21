@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
+  // 用户模块路由
   {
     path: '/login',
     name: 'Login',
@@ -21,6 +22,26 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: () => import('../views/Profile.vue'),
+    meta: { requiresAuth: true }
+  },
+
+  // 疫苗管理模块路由
+  {
+    path: '/vaccine',
+    name: 'VaccineList',
+    component: () => import('../views/VaccineList.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/vaccine/:id',
+    name: 'VaccineDetail',
+    component: () => import('../views/VaccineDetail.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/vaccine-batch',
+    name: 'VaccineBatch',
+    component: () => import('../views/VaccineBatch.vue'),
     meta: { requiresAuth: true }
   }
 ]
