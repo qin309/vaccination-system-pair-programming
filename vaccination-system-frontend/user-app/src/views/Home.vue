@@ -48,15 +48,24 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Calendar, Document, Files, User } from '@element-plus/icons-vue'
+import { ElMessageBox } from 'element-plus'
 import api from '../api'
 
 const router = useRouter()
 const user = ref(JSON.parse(localStorage.getItem('user')))
 
 const handleLogout = () => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
-  router.push('/login')
+  ElMessageBox.confirm('确定要退出登录吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(() => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    router.push('/login')
+  }).catch(() => {
+    // 取消退出，不做任何操作
+  })
 }
 </script>
 

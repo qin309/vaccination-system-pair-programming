@@ -26,9 +26,15 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
+      ElMessage.error('登录已过期，请重新登录')
       window.location.href = '/login'
+    } else if (error.response?.status === 403) {
+      ElMessage.error('没有权限访问该功能')
+    } else if (error.response?.status === 500) {
+      ElMessage.error('服务器错误，请稍后重试')
+    } else {
+      ElMessage.error(error.response?.data?.message || '网络错误，请检查网络连接')
     }
-    ElMessage.error(error.response?.data?.message || '网络错误')
     return Promise.reject(error)
   }
 )

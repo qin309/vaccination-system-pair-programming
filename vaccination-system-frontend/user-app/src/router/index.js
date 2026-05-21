@@ -32,7 +32,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  if (to.meta.requiresAuth && !token) {
+
+  // 已登录用户访问登录页/注册页，自动跳转首页
+  if (token && (to.path === '/login' || to.path === '/register')) {
+    next('/')
+  } else if (to.meta.requiresAuth && !token) {
     next('/login')
   } else {
     next()
