@@ -2,25 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/Register.vue')
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue'),
+    path: '/appointment',
+    name: 'Appointment',
+    component: () => import('../views/Appointment.vue'),
     meta: { requiresAuth: true }
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import('../views/Profile.vue'),
+    path: '/my-appointments',
+    name: 'MyAppointments',
+    component: () => import('../views/MyAppointments.vue'),
     meta: { requiresAuth: true }
   }
 ]
@@ -32,11 +22,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-
-  // 已登录用户访问登录页/注册页，自动跳转首页
-  if (token && (to.path === '/login' || to.path === '/register')) {
-    next('/')
-  } else if (to.meta.requiresAuth && !token) {
+  if (to.meta.requiresAuth && !token) {
     next('/login')
   } else {
     next()
