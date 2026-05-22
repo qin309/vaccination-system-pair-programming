@@ -3,6 +3,12 @@
     <div class="login-box">
       <h2>疫苗接种系统</h2>
       <el-form :model="form" :rules="rules" ref="formRef">
+        <el-form-item prop="role">
+          <el-select v-model="form.role" placeholder="请选择角色" style="width: 100%">
+            <el-option label="普通用户" :value="0" />
+            <el-option label="管理员" :value="2" />
+          </el-select>
+        </el-form-item>
         <el-form-item prop="username">
           <el-input v-model="form.username" placeholder="用户名" prefix-icon="User" />
         </el-form-item>
@@ -31,11 +37,13 @@ const formRef = ref()
 const loading = ref(false)
 
 const form = reactive({
+  role: 0,
   username: '',
   password: ''
 })
 
 const rules = {
+  role: [{ required: true, message: '请选择角色', trigger: 'change' }],
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 }
@@ -64,7 +72,7 @@ const handleLogin = async () => {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 .login-box {
-  width: 350px;
+  width: 380px;
   padding: 30px;
   background: #fff;
   border-radius: 10px;

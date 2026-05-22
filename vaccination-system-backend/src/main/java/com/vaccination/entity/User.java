@@ -1,22 +1,22 @@
 package com.vaccination.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@TableName("family_member")
-public class FamilyMember {
+@TableName("sys_user")
+public class User {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private Long userId;
-    private String name;
-    private String idCard;
+    private String username;
+    private String password;
     private String phone;
-    private LocalDate birthDate;
-    private Integer gender;
-    private String relation;
+    private String realName;
+    private String idCard;
+    private Integer role;
     private Integer status;
+    private Integer loginFailCount;
+    private LocalDateTime lockTime;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
@@ -30,29 +30,32 @@ public class FamilyMember {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getIdCard() { return idCard; }
-    public void setIdCard(String idCard) { this.idCard = idCard; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
 
-    public LocalDate getBirthDate() { return birthDate; }
-    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
+    public String getRealName() { return realName; }
+    public void setRealName(String realName) { this.realName = realName; }
 
-    public Integer getGender() { return gender; }
-    public void setGender(Integer gender) { this.gender = gender; }
+    public String getIdCard() { return idCard; }
+    public void setIdCard(String idCard) { this.idCard = idCard; }
 
-    public String getRelation() { return relation; }
-    public void setRelation(String relation) { this.relation = relation; }
+    public Integer getRole() { return role; }
+    public void setRole(Integer role) { this.role = role; }
 
     public Integer getStatus() { return status; }
     public void setStatus(Integer status) { this.status = status; }
+
+    public Integer getLoginFailCount() { return loginFailCount; }
+    public void setLoginFailCount(Integer loginFailCount) { this.loginFailCount = loginFailCount; }
+
+    public LocalDateTime getLockTime() { return lockTime; }
+    public void setLockTime(LocalDateTime lockTime) { this.lockTime = lockTime; }
 
     public LocalDateTime getCreateTime() { return createTime; }
     public void setCreateTime(LocalDateTime createTime) { this.createTime = createTime; }

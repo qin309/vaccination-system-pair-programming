@@ -74,8 +74,12 @@ const handleCancel = async (id) => {
 }
 
 const loadData = async () => {
-  const res = await api.getAppointments()
-  appointments.value = res.data
+  const res1 = await api.getAppointments()
+  appointments.value = res1.data
+  const res2 = await api.getVaccines()
+  vaccines.value = res2.data
+  const res3 = await api.getFamilyMembers()
+  familyMembers.value = res3.data
 }
 
 onMounted(loadData)

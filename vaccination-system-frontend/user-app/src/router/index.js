@@ -50,13 +50,19 @@ const routes = [
     path: '/appointment',
     name: 'Appointment',
     component: () => import('../views/Appointment.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, roles: [0] }
   },
   {
     path: '/my-appointments',
     name: 'MyAppointments',
     component: () => import('../views/MyAppointments.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, roles: [0] }
+  },
+  {
+    path: '/appointment-list',
+    name: 'AppointmentList',
+    component: () => import('../views/AppointmentList.vue'),
+    meta: { requiresAuth: true, roles: [1, 2] }
   },
 
   // 接种记录模块路由
@@ -72,7 +78,15 @@ const routes = [
     path: '/family',
     name: 'Family',
     component: () => import('../views/Family.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, roles: [0] }
+  },
+
+  // 用户管理路由（管理员）
+  {
+    path: '/user-list',
+    name: 'UserList',
+    component: () => import('../views/UserList.vue'),
+    meta: { requiresAuth: true, roles: [2] }
   }
 ]
 

@@ -17,7 +17,7 @@
 
         <el-form-item label="选择疫苗" prop="vaccineId">
           <el-select v-model="form.vaccineId" placeholder="请选择疫苗" style="width: 100%">
-            <el-option v-for="v in vaccines" :key="v.id" :label="`${v.name} - ${v.type === 0 ? '免费' : `${v.price}元`}`" :value="v.id" />
+            <el-option v-for="v in vaccines" :key="v.id" :label="v.name + ' - ' + (v.type === 0 ? '免费' : v.price + '元')" :value="v.id" />
           </el-select>
         </el-form-item>
 
@@ -27,7 +27,7 @@
 
         <el-form-item label="预约时段" prop="appointmentTime">
           <el-select v-model="form.appointmentTime" placeholder="请先选择日期" style="width: 100%">
-            <el-option v-for="slot in slots" :key="slot.id" :label="`${slot.startTime} - ${slot.endTime} (${slot.currentCount}/${slot.maxCount})`" :value="slot.startTime" :disabled="slot.currentCount >= slot.maxCount" />
+            <el-option v-for="slot in slots" :key="slot.id" :label="slot.startTime + ' - ' + slot.endTime + ' (' + slot.currentCount + '/' + slot.maxCount + ')'" :value="slot.startTime" :disabled="slot.currentCount >= slot.maxCount" />
           </el-select>
         </el-form-item>
 
@@ -82,8 +82,10 @@ const loadSlots = async () => {
 }
 
 onMounted(async () => {
-  // 需要从疫苗模块获取疫苗列表，从家庭成员模块获取家庭成员列表
-  // 这里暂时使用模拟数据
+  const res1 = await api.getVaccines()
+  vaccines.value = res1.data
+  const res2 = await api.getFamilyMembers()
+  familyMembers.value = res2.data
 })
 
 const handleSubmit = async () => {

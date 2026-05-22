@@ -46,6 +46,7 @@ export default {
   getUserInfo: () => api.get('/user/info'),
   updateUserInfo: (data) => api.put('/user/update', data),
   changePassword: (oldPassword, newPassword) => api.post('/user/changePassword', null, { params: { oldPassword, newPassword } }),
+  getUserList: () => api.get('/user/list'),
 
   // 疫苗管理模块接口
   getVaccines: () => api.get('/vaccine/list'),

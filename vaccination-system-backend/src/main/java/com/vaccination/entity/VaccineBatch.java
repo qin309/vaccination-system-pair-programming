@@ -3,21 +3,19 @@ package com.vaccination.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-@TableName("appointment")
-public class Appointment {
+@TableName("vaccine_batch")
+public class VaccineBatch {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private Long userId;
-    private Long familyMemberId;
     private Long vaccineId;
-    private Long vaccineBatchId;
-    private LocalDate appointmentDate;
-    private LocalTime appointmentTime;
+    private String batchNo;
+    private LocalDate productionDate;
+    private LocalDate expiryDate;
+    private Integer quantity;
+    private Integer usedQuantity;
     private Integer status;
-    private String remark;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
@@ -31,29 +29,26 @@ public class Appointment {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
-
-    public Long getFamilyMemberId() { return familyMemberId; }
-    public void setFamilyMemberId(Long familyMemberId) { this.familyMemberId = familyMemberId; }
-
     public Long getVaccineId() { return vaccineId; }
     public void setVaccineId(Long vaccineId) { this.vaccineId = vaccineId; }
 
-    public Long getVaccineBatchId() { return vaccineBatchId; }
-    public void setVaccineBatchId(Long vaccineBatchId) { this.vaccineBatchId = vaccineBatchId; }
+    public String getBatchNo() { return batchNo; }
+    public void setBatchNo(String batchNo) { this.batchNo = batchNo; }
 
-    public LocalDate getAppointmentDate() { return appointmentDate; }
-    public void setAppointmentDate(LocalDate appointmentDate) { this.appointmentDate = appointmentDate; }
+    public LocalDate getProductionDate() { return productionDate; }
+    public void setProductionDate(LocalDate productionDate) { this.productionDate = productionDate; }
 
-    public LocalTime getAppointmentTime() { return appointmentTime; }
-    public void setAppointmentTime(LocalTime appointmentTime) { this.appointmentTime = appointmentTime; }
+    public LocalDate getExpiryDate() { return expiryDate; }
+    public void setExpiryDate(LocalDate expiryDate) { this.expiryDate = expiryDate; }
+
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+
+    public Integer getUsedQuantity() { return usedQuantity; }
+    public void setUsedQuantity(Integer usedQuantity) { this.usedQuantity = usedQuantity; }
 
     public Integer getStatus() { return status; }
     public void setStatus(Integer status) { this.status = status; }
-
-    public String getRemark() { return remark; }
-    public void setRemark(String remark) { this.remark = remark; }
 
     public LocalDateTime getCreateTime() { return createTime; }
     public void setCreateTime(LocalDateTime createTime) { this.createTime = createTime; }

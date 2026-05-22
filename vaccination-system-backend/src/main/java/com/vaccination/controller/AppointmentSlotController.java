@@ -1,52 +1,37 @@
 package com.vaccination.controller;
 
 import com.vaccination.common.Result;
-import com.vaccination.dto.AppointmentDTO;
-import com.vaccination.entity.Appointment;
-import com.vaccination.service.AppointmentService;
+import com.vaccination.entity.AppointmentSlot;
+import com.vaccination.service.AppointmentSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/appointment")
-public class AppointmentController {
+@RequestMapping("/appointment-slot")
+public class AppointmentSlotController {
 
     @Autowired
-    private AppointmentService appointmentService;
+    private AppointmentSlotService appointmentSlotService;
 
-    @GetMapping("/my")
-    public Result<List<Appointment>> myAppointments(HttpServletRequest request) {
-        Long userId = (Long) request.getAttribute("userId");
-        return Result.success(appointmentService.findByUserId(userId));
+    @GetMapping("/available")
+    public Result<List<AppointmentSlot>> availableSlots(@RequestParam String date) {
+        return Result.success(appointmentSlotService.findAvailableSlots(date));
     }
 
     @PostMapping("/create")
-    public Result<Appointment> create(HttpServletRequest request, @RequestBody AppointmentDTO dto) {
-        Long userId = (Long) request.getAttribute("userId");
-        dto.setUserId(userId);
-        return Result.success(appointmentService.createAppointment(dto));
-    }
-
-    @PostMapping("/cancel/{id}")
-    public Result<Boolean> cancel(HttpServletRequest request, @PathVariable Long id) {
-        Long userId = (Long) request.getAttribute("userId");
-        return Result.success(appointmentService.cancelAppointment(id, userId));
+    public Result<Boolean> createSlots(@RequestParam String date, @RequestParam(defaultValue = "10") int count) {
+        return Result.success(appointmentSlotService.createSlotsForDate(date, count));
     }
 
     @GetMapping("/list")
-    public Result<List<Appointment>> list(HttpServletRequest request) {
-        Integer role = (Integer) request.getAttribute("role");
-        if (role != 1 && role != 2) {
-            return Result.error(403, "无权限访问");
-        }
-        return Result.success(appointmentService.list());
+    public Result<List<AppointmentSlot>> list() {
+        return Result.success(appointmentSlotService.list());
     }
 
     @GetMapping("/detail/{id}")
-    public Result<Appointment> detail(@PathVariable Long id) {
-        return Result.success(appointmentService.getById(id));
+    public Result<AppointmentSlot> detail(@PathVariable Long id) {
+        return Result.success(appointmentSlotService.getById(id));
     }
 }

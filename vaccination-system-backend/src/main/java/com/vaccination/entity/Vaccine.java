@@ -1,21 +1,20 @@
 package com.vaccination.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@TableName("family_member")
-public class FamilyMember {
+@TableName("vaccine")
+public class Vaccine {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private Long userId;
     private String name;
-    private String idCard;
-    private String phone;
-    private LocalDate birthDate;
-    private Integer gender;
-    private String relation;
+    private String code;
+    private String manufacturer;
+    private Integer type;
+    private BigDecimal price;
+    private String description;
     private Integer status;
 
     @TableField(fill = FieldFill.INSERT)
@@ -30,26 +29,23 @@ public class FamilyMember {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
-
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getIdCard() { return idCard; }
-    public void setIdCard(String idCard) { this.idCard = idCard; }
+    public String getCode() { return code; }
+    public void setCode(String code) { this.code = code; }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getManufacturer() { return manufacturer; }
+    public void setManufacturer(String manufacturer) { this.manufacturer = manufacturer; }
 
-    public LocalDate getBirthDate() { return birthDate; }
-    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
+    public Integer getType() { return type; }
+    public void setType(Integer type) { this.type = type; }
 
-    public Integer getGender() { return gender; }
-    public void setGender(Integer gender) { this.gender = gender; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
-    public String getRelation() { return relation; }
-    public void setRelation(String relation) { this.relation = relation; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public Integer getStatus() { return status; }
     public void setStatus(Integer status) { this.status = status; }
