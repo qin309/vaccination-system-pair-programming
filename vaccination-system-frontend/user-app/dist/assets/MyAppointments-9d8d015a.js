@@ -1,0 +1,1 @@
+import{_,r as e,o as c,c as s,b as t,w as a}from"./index-52e69e18.js";const d={},r={class:"placeholder-container"};function p(l,i){const o=e("el-empty"),n=e("el-card");return c(),s("div",r,[t(n,null,{default:a(()=>[t(o,{description:"我的预约功能开发中，请等待模块合并"})]),_:1})])}const f=_(d,[["render",p],["__scopeId","data-v-d31d7a72"]]);export{f as default};

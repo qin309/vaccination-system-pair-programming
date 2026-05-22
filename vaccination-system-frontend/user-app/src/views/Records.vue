@@ -63,9 +63,8 @@ const loadRecords = async (tab) => {
 }
 
 onMounted(async () => {
-  // 需要从疫苗模块获取疫苗列表
-  // const res1 = await api.getVaccines()
-  // vaccines.value = res1.data
+  const res1 = await api.getVaccines()
+  vaccines.value = res1.data
   const res2 = await api.getFamilyMembers()
   familyMembers.value = res2.data
   loadRecords('self')
