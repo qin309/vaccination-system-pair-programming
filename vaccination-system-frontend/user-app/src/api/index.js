@@ -63,9 +63,9 @@ export default {
   getAppointmentList: () => api.get('/appointment/list'),
   getAppointmentDetail: (id) => api.get(`/appointment/detail/${id}`),
 
-  getSlots: (date) => api.get(`/slot/available?date=${date}`),
-  getSlotList: (date) => api.get(`/slot/list?date=${date}`),
-  createSlots: (date, count) => api.post(`/slot/create?date=${date}&count=${count}`),
+  getSlots: (date) => api.get(`/appointment-slot/available?date=${date}`),
+  getSlotList: () => api.get('/appointment-slot/list'),
+  createSlots: (date, count) => api.post(`/appointment-slot/create?date=${date}&count=${count}`),
 
   // 接种记录模块接口
   getRecords: () => api.get('/record/my'),

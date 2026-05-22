@@ -59,13 +59,15 @@ const routes = [
     meta: { requiresAuth: true }
   },
 
-  // 接种记录模块路由（占位，后续合并后可用）
+  // 接种记录模块路由
   {
     path: '/records',
     name: 'Records',
     component: () => import('../views/Records.vue'),
     meta: { requiresAuth: true }
   },
+
+  // 家庭成员模块路由
   {
     path: '/family',
     name: 'Family',
