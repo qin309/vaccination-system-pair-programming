@@ -17,6 +17,7 @@ spring:
   sql:
     init:
       encoding: UTF-8
+      mode: always
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
