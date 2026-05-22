@@ -1,0 +1,1 @@
+import{_,r as e,o as n,c as a,b as c,w as s}from"./index-52e69e18.js";const l={},r={class:"placeholder-container"};function d(p,i){const t=e("el-empty"),o=e("el-card");return n(),a("div",r,[c(o,null,{default:s(()=>[c(t,{description:"家庭成员功能开发中，请等待模块合并"})]),_:1})])}const f=_(l,[["render",d],["__scopeId","data-v-072c8ead"]]);export{f as default};

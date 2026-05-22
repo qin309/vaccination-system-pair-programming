@@ -1,0 +1,1 @@
+import{_,r as e,o as n,c as s,b as c,w as a}from"./index-52e69e18.js";const r={},d={class:"placeholder-container"};function l(p,i){const o=e("el-empty"),t=e("el-card");return n(),s("div",d,[c(t,null,{default:a(()=>[c(o,{description:"接种记录功能开发中，请等待模块合并"})]),_:1})])}const f=_(r,[["render",l],["__scopeId","data-v-c724c216"]]);export{f as default};
