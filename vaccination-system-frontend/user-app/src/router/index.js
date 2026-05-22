@@ -43,6 +43,34 @@ const routes = [
     name: 'VaccineBatch',
     component: () => import('../views/VaccineBatch.vue'),
     meta: { requiresAuth: true }
+  },
+
+  // 预约模块路由（占位，后续合并后可用）
+  {
+    path: '/appointment',
+    name: 'Appointment',
+    component: () => import('../views/Appointment.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/my-appointments',
+    name: 'MyAppointments',
+    component: () => import('../views/MyAppointments.vue'),
+    meta: { requiresAuth: true }
+  },
+
+  // 接种记录模块路由（占位，后续合并后可用）
+  {
+    path: '/records',
+    name: 'Records',
+    component: () => import('../views/Records.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/family',
+    name: 'Family',
+    component: () => import('../views/Family.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 

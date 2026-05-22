@@ -13,6 +13,14 @@
       </el-header>
       <el-main>
         <div class="menu-grid">
+          <div class="menu-item" @click="router.push('/vaccine')">
+            <el-icon size="40"><FirstAidKit /></el-icon>
+            <span>疫苗列表</span>
+          </div>
+          <div class="menu-item" @click="router.push('/vaccine-batch')">
+            <el-icon size="40"><Box /></el-icon>
+            <span>批次管理</span>
+          </div>
           <div class="menu-item" @click="router.push('/appointment')">
             <el-icon size="40"><Calendar /></el-icon>
             <span>预约接种</span>
@@ -47,7 +55,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Calendar, Document, Files, User } from '@element-plus/icons-vue'
+import { Calendar, Document, Files, User, FirstAidKit, Box } from '@element-plus/icons-vue'
 import { ElMessageBox } from 'element-plus'
 import api from '../api'
 
@@ -92,7 +100,7 @@ const handleLogout = () => {
 }
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
 }
