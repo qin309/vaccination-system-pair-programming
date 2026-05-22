@@ -54,5 +54,30 @@ export default {
   updateVaccine: (data) => api.put('/vaccine/update', data),
   getBatchList: () => api.get('/vaccine/batch/list'),
   getExpiringBatches: () => api.get('/vaccine/batch/expiring'),
-  addBatch: (data) => api.post('/vaccine/batch/add', data)
+  addBatch: (data) => api.post('/vaccine/batch/add', data),
+
+  // 预约模块接口
+  getAppointments: () => api.get('/appointment/my'),
+  createAppointment: (data) => api.post('/appointment/create', data),
+  cancelAppointment: (id) => api.post(`/appointment/cancel/${id}`),
+  getAppointmentList: () => api.get('/appointment/list'),
+  getAppointmentDetail: (id) => api.get(`/appointment/detail/${id}`),
+
+  getSlots: (date) => api.get(`/slot/available?date=${date}`),
+  getSlotList: (date) => api.get(`/slot/list?date=${date}`),
+  createSlots: (date, count) => api.post(`/slot/create?date=${date}&count=${count}`),
+
+  // 接种记录模块接口
+  getRecords: () => api.get('/record/my'),
+  getFamilyRecords: (id) => api.get(`/record/family/${id}`),
+  createRecord: (data) => api.post('/record/create', data),
+  recordAdverse: (id, reaction) => api.post(`/record/adverse/${id}?reaction=${encodeURIComponent(reaction)}`),
+  getRecordList: () => api.get('/record/list'),
+
+  // 家庭成员模块接口
+  getFamilyMembers: () => api.get('/family/list'),
+  addFamilyMember: (data) => api.post('/family/add', data),
+  updateFamilyMember: (data) => api.put('/family/update', data),
+  deleteFamilyMember: (id) => api.delete(`/family/delete/${id}`),
+  getFamilyDetail: (id) => api.get(`/family/detail/${id}`)
 }

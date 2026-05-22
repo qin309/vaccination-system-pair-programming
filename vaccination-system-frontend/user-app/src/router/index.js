@@ -45,7 +45,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
 
-  // 预约模块路由（占位，后续合并后可用）
+  // 预约模块路由
   {
     path: '/appointment',
     name: 'Appointment',
